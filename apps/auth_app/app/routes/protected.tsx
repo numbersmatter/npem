@@ -4,26 +4,19 @@ import {
   redirect, 
   useFetcher 
 } from 'react-router'
-import { getServerEnv } from '~/env.server'
-import { createSupaServerClient } from '~/lib/supabase/server'
+import { createSupaServerClient } from '~/lib/supabase/supa_client.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // Create a supabase client with the request object
+  const { supabase, headers } = createSupaServerClient({ request})
 
-  const  {
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY,
-  } = getServerEnv()
-
-  const { supabase, headers } = createSupaServerClient({
-    supa_url: SUPABASE_URL,
-    supa_key: SUPABASE_ANON_KEY,
-    request
-  })
-
+  const { data, error } = await supabase.auth.getUser()
   
+  if (error || !data?.user) {
+    return redirect('/login')
+  }
 
-  return
+  return data
 }
 
 

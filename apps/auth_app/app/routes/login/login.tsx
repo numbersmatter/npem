@@ -1,5 +1,4 @@
-import { createClient, createSupaServerClient } from '~/lib/supabase/server'
-import { Button } from '~/components/ui/button'
+import { Button } from '~/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,22 +8,17 @@ import {
 } from '~/components/ui/card'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
-import { type ActionFunctionArgs, Link, redirect, useFetcher } from 'react-router'
-import { getServerEnv } from '~/env.server'
+import { 
+  type ActionFunctionArgs, 
+  Link, 
+  redirect, 
+  useFetcher 
+} from 'react-router';
+import { createSupaServerClient } from '~/lib/supabase/supa_client.server';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   // Create a supabase client with the request object
-
-  const  {
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY,
-  } = getServerEnv()
-
-  const { supabase, headers } = createSupaServerClient({
-    supa_url: SUPABASE_URL,
-    supa_key: SUPABASE_ANON_KEY,
-    request
-  })
+  const { supabase, headers } = createSupaServerClient({request})
 
   const formData = await request.formData()
 
