@@ -6,7 +6,8 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "reveal": "react-router reveal"
   },
   "dependencies": {
     "@react-router/node": "^7.5.3",
@@ -14,7 +15,8 @@
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.5.3"
+    "react-router": "^7.5.3",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
