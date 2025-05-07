@@ -2,3 +2,13 @@
 #secret
 .env.*
 .env
+
+
+
+# Node modules
+.DS_Store
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
