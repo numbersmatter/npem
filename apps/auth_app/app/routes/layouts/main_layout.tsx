@@ -1,11 +1,25 @@
 import { Form, Link, Outlet } from "react-router";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarRail, SidebarTrigger } from "~/components/ui/sidebar";
+import { 
+  Sidebar, 
+  SidebarContent, 
+  SidebarFooter, 
+  SidebarGroup, 
+  SidebarGroupContent, 
+  SidebarGroupLabel, 
+  SidebarHeader, 
+  SidebarInset, 
+  SidebarMenu, 
+  SidebarMenuButton, 
+  SidebarMenuItem, 
+  SidebarProvider, 
+  SidebarRail, 
+  SidebarTrigger 
+} from "~/components/ui/sidebar";
+
 import { Separator } from "~/components/ui/separator";
 import { Button } from "~/components/ui/button";
-import type { Route } from "./+types/main_layout";
 
 
-// This is sample data.
 const data = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
@@ -47,26 +61,18 @@ const data = {
     },
   ],
 }
-export const loader = async ({ request }: Route.LoaderArgs) => {
-  return {};
-};
 
 
 export default function MainLayout() {
   return (
-    <>
-      <>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <PageHeader />
-            <Outlet />
-          </SidebarInset>
-        </SidebarProvider>
-      </>
-    </>
+    <SidebarProvider>
+    <AppSidebar />
+      <Outlet />
+    </SidebarProvider>
+
   )
 }
+
 function PageHeader() {
 
   return (
@@ -88,6 +94,8 @@ function LogOutButton() {
     </Form>
   )
 }
+
+
 
 
 function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -124,3 +132,4 @@ function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     </Sidebar>
   )
 }
+
