@@ -1,6 +1,5 @@
 import { redirect, type LoaderFunctionArgs } from 'react-router';
 import { type EmailOtpType } from '@supabase/supabase-js';
-import { getServerEnv } from '~/env.server';
 import { createSupaServerClient } from '~/lib/supabase/supa_client.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -10,10 +9,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const next = requestUrl.searchParams.get('next') || '/'
   const headers = new Headers()
 
-  const  {
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY,
-  } = getServerEnv()
 
   const  { supabase } = createSupaServerClient({ request })
 
