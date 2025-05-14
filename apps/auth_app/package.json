@@ -1,5 +1,5 @@
 {
-  "name": "auth_app",
+  "name": "@npem/auth_app",
   "private": true,
   "type": "module",
   "scripts": {

@@ -132,6 +132,9 @@ importers:
       '@react-router/dev':
         specifier: ^7.5.3
         version: 7.5.3(@react-router/serve@7.5.3(react-router@7.5.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3))(@types/node@20.17.45)(jiti@2.4.2)(lightningcss@1.29.2)(react-router@7.5.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)(vite@6.3.5(@types/node@20.17.45)(jiti@2.4.2)(lightningcss@1.29.2))
+      '@rollup/rollup-linux-x64-musl':
+        specifier: ^4.40.2
+        version: 4.40.2
       '@tailwindcss/vite':
         specifier: ^4.1.4
         version: 4.1.5(vite@6.3.5(@types/node@20.17.45)(jiti@2.4.2)(lightningcss@1.29.2))
@@ -1010,7 +1013,6 @@ packages:
 
   '@rollup/rollup-linux-x64-musl@4.40.2':
     resolution: {integrity: sha512-tD46wKHd+KJvsmije4bUskNuvWKFcTOIM9tZ/RrmIvcXnbi0YK/cKS9FzFtAm7Oxi2EhV5N2OpfFB348vSQRXA==}
-    cpu: [x64]
     os: [linux]
 
   '@rollup/rollup-win32-arm64-msvc@4.40.2':
@@ -3049,8 +3051,7 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.40.2':
     optional: true
 
-  '@rollup/rollup-linux-x64-musl@4.40.2':
-    optional: true
+  '@rollup/rollup-linux-x64-musl@4.40.2': {}
 
   '@rollup/rollup-win32-arm64-msvc@4.40.2':
     optional: true
