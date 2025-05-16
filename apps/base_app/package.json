@@ -2,6 +2,9 @@
   "name": "@npem/base_app",
   "private": true,
   "type": "module",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
@@ -18,7 +21,7 @@
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
-    "@rollup/rollup-linux-x64-musl": "^4.40.2",
+    
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^20",
     "@types/react": "^19.1.2",
