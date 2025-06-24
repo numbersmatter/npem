@@ -5,13 +5,14 @@ import { createSupaServerClient } from "~/lib/supabase_server_client.server";
 export async function loader({ request }: LoaderFunctionArgs) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
-  const next = requestUrl.searchParams.get('next') || '/';
+  const next = requestUrl.searchParams.get('next') || '/protected';
   const headers = new Headers();
 
   const { supabase } = createSupaServerClient({ request });
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+    console.log('exchangeCodeForSession', { code, error });
 
     if (!error) {
       return redirect(next, { headers });

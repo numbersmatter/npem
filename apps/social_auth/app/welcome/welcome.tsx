@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -38,6 +39,23 @@ export function Welcome() {
                   </a>
                 </li>
               ))}
+            </ul>
+            <ul className="flex flex-col gap-2">
+              <li>
+                <Link to="/login" className="text-blue-700 hover:underline dark:text-blue-500">
+                  To Login Page
+                </Link>
+              </li>
+              <li>
+                <Link to="/test" className="text-blue-700 hover:underline dark:text-blue-500">
+                  To Test Page
+                </Link>
+              </li>
+              <li>
+                <Link to="/protected" className="text-blue-700 hover:underline dark:text-blue-500">
+                  To Protected Page
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
