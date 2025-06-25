@@ -1,11 +1,7 @@
 import {
   type LoaderFunctionArgs,
-  Link,
-  redirect,
-  useFetcher
 } from 'react-router'
 import { requireAuth } from '~/lib/clerk_auth.server'
-import { createSupaServerClient } from '~/lib/supabase_server_client.server'
 import type { Route } from './+types/protected'
 
 export async function loader(args: LoaderFunctionArgs) {
