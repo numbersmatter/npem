@@ -1,3 +1,4 @@
+import { Button } from "~/components/ui/button";
 import type { Route } from "./+types/home";
 import { Link } from "react-router";
 
@@ -16,20 +17,26 @@ export default function Home() {
           <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
             What&apos;s next?
           </p>
-          <ul>
+          <ul className="space-y-2">
             <li>
               <Link to="/sign-up">
-                Sign-up
+                <Button variant={"link"}>
+                  Sign-up
+                </Button>
               </Link>
             </li>
             <li>
               <Link to="/login">
-                Sign-in
+                <Button variant={"link"}>
+                  Login
+                </Button>
               </Link>
             </li>
             <li>
               <Link to="/protected">
-                Protected Route
+                <Button variant={"link"}>
+                  Protected Route
+                </Button>
               </Link>
             </li>
           </ul>
