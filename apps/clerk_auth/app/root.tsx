@@ -61,7 +61,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
     >
       <header className="flex items-center justify-center py-8 px-4">
         <SignedOut>
-          <SignInButton />
+          <h3>No User</h3>
         </SignedOut>
         <SignedIn>
           <UserButton />

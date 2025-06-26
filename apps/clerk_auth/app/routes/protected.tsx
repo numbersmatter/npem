@@ -1,7 +1,7 @@
 import {
   type LoaderFunctionArgs,
 } from 'react-router'
-import { requireAuth } from '~/lib/clerk_auth.server'
+import { requireAuth } from '~/services/clerk_auth.server'
 import type { Route } from './+types/protected'
 
 export async function loader(args: LoaderFunctionArgs) {
