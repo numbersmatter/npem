@@ -1,5 +1,5 @@
 {
-  "name": "apps-onboarding",
+  "name": "@npem/onboarding",
   "private": true,
   "type": "module",
   "files": [
