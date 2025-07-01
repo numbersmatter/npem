@@ -47,18 +47,11 @@ export const getClerkAuth = async (args: LoaderFunctionArgs) => {
 };
 
 const requireAuth = async (args: LoaderFunctionArgs) => {
-  // const userId = "bROxxo3adedzFYFaOy7t"
-
-  // const email = "test@testemail.com"
-  // const phone = "555-555-555"
-  // const fname = "test"
-  // const lname= "user"
-
   const { SIGN_IN_PATH, userId, email, phone, fname, lname } =
     await getClerkAuth(args);
 
   if (!userId) {
-    throw redirect(SIGN_IN_PATH);
+    throw redirect(SIGN_IN_PATH, 302);
   }
 
   return {

@@ -1,4 +1,5 @@
 import { SignIn } from "@clerk/react-router"
+import plantHydrating from "~/images/plant hydrating.jpeg"
 
 
 export default function Login() {
@@ -8,7 +9,7 @@ export default function Login() {
       <div className="flex flex-col place-content-center">
         <div className="mx-auto">
           <img
-            src="https://static.showit.co/400/Z5tHYwifQaCauHDR4UCljA/shared/cis_thomasville_horizontal_web.png"
+            src={plantHydrating}
             alt="logo"
             className="h-36 object-contain"
           />
@@ -25,7 +26,6 @@ export default function Login() {
             }
           />
 
-          {/* <pre>{JSON.stringify(authTry, null, 2)}</pre> */}
         </main>
       </div>
     </div>
