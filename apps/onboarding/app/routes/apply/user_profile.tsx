@@ -1,4 +1,5 @@
 import { useState } from "react";
+import UserProfileForm from "~/components/custom/form-layout";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
@@ -23,11 +24,9 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl px-0 py-4 sm:px-6 lg:px-8">
-      <ProfileCard>
-        <PersonalInfoForm />
-      </ProfileCard>
-    </div>
+    <main className="container max-w-7xl mx-auto sm:px-6">
+      <UserProfileForm />
+    </main>
   );
 }
 
