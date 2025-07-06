@@ -5,6 +5,7 @@ import UserProfileForm from '~/components/custom/form-layout'
 import { cn } from '~/lib/utils'
 import type { Route } from './+types/stacked_layout'
 import planthydrating from '~/images/plant hydrating.jpeg'
+import { UserButton } from '@clerk/react-router'
 
 
 
@@ -20,7 +21,7 @@ export function loader() {
   const navigation = [
     { name: 'Home', href: '/', current: true },
     { name: 'Profile', href: '/profile', current: false },
-    { name: 'Events', href: '/events', current: false },
+    { name: 'Events', href: '/protected', current: false },
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile' },
@@ -81,10 +82,11 @@ export default function StackedLayout({ loaderData }: Route.ComponentProps) {
                       {item.name}
                     </NavLink>
                   ))}
+
+                  <UserButton />
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -92,6 +94,7 @@ export default function StackedLayout({ loaderData }: Route.ComponentProps) {
                     <MenuButton className="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
+                      <span className="">Open user menu</span>
                       <img alt="" src={user.imageUrl} className="size-8 rounded-full" />
                     </MenuButton>
                   </div>
@@ -111,6 +114,7 @@ export default function StackedLayout({ loaderData }: Route.ComponentProps) {
                     ))}
                   </MenuItems>
                 </Menu>
+                <UserButton />
               </div>
               <div className="-mr-2 flex items-center sm:hidden">
                 {/* Mobile menu button */}
@@ -176,6 +180,7 @@ export default function StackedLayout({ loaderData }: Route.ComponentProps) {
             </div>
           </DisclosurePanel>
         </Disclosure>
+
         <Outlet />
       </div>
     </>

@@ -5,6 +5,8 @@ const envSchema = z.object({
   SUPABASE_ANON_KEY: z.string(),
   CLERK_PUBLISHABLE_KEY: z.string(),
   CLERK_SECRET_KEY: z.string(),
+  SIGN_IN_PATH: z.string().default("login"),
+  SIGN_UP_PATH: z.string().default("sign-up"),
 });
 
 export const initEnvVariables = () => {

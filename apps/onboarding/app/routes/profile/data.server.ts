@@ -8,5 +8,7 @@ export function updateAddress({ formData }: { formData: FormData }) {
     return submission.reply();
   }
 
-  return submission.reply();
+  return writeAddressToSupabase();
 }
+
+function writeAddressToSupabase() {}

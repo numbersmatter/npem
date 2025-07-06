@@ -50,8 +50,13 @@ const requireAuth = async (args: LoaderFunctionArgs) => {
   const { SIGN_IN_PATH, userId, email, phone, fname, lname } =
     await getClerkAuth(args);
 
+  const url = new URL(args.request.url);
+  const path = url.pathname;
+  const encodedPath = encodeURIComponent(path);
+  const redirect_url = SIGN_IN_PATH + "?redirect_url=" + encodedPath;
+
   if (!userId) {
-    throw redirect(SIGN_IN_PATH, 302);
+    throw redirect(redirect_url, 302);
   }
 
   return {

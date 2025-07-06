@@ -114,3 +114,25 @@ CREATE TABLE public.sections (
 ALTER TABLE public.sections ENABLE ROW LEVEL SECURITY;
 
 ```
+
+## Addresses
+
+```SQL
+CREATE TABLE public.addresses (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id TEXT NOT NULL,
+    street_address TEXT NOT NULL,
+    street_address2 TEXT,
+    city TEXT NOT NULL,
+    state TEXT NOT NULL,
+    zip_code TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT now() NOT NULL
+);
+
+-- Create an index on user_id for faster queries
+CREATE INDEX addresses_user_id_idx ON public.addresses (user_id);
+
+-- Enable Row Level Security
+ALTER TABLE public.addresses ENABLE ROW LEVEL SECURITY;
+```
