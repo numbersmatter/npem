@@ -3,6 +3,7 @@ import { z } from "zod";
 const envSchema = z.object({
   SUPABASE_URL: z.string().url(),
   SUPABASE_ANON_KEY: z.string(),
+  SUPABASE_SERVICE_KEY: z.string(),
   CLERK_PUBLISHABLE_KEY: z.string(),
   CLERK_SECRET_KEY: z.string(),
   SIGN_IN_PATH: z.string().default("login"),

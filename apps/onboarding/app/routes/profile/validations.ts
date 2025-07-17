@@ -56,10 +56,14 @@ export const US_STATE_ABBREVIATIONS = [
 ] as const;
 
 const AddressSchema = z.object({
-  street: z.string("Required").min(2, "Must be atleast 2 characters").max(100),
+  street_address: z
+    .string("Required")
+    .min(2, "Must be atleast 2 characters")
+    .max(100),
+  street_address2: z.string().optional(),
   city: z.string("Required").min(2, "Must be atleast 2 characters").max(100),
   state: z.enum(US_STATE_ABBREVIATIONS),
-  zip: z.string("Required").length(5, " Must be 5 characters"),
+  zip_code: z.string("Required").length(5, " Must be 5 characters"),
 });
 
 export const validateAddress = ({ formData }: { formData: FormData }) => {

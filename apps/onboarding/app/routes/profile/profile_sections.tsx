@@ -111,14 +111,25 @@ export function PersonalInfo() {
 
 
 
-export function AddressFormSection() {
+export function AddressFormSection({
+  address
+}: {
+  address?: {
+    street_address: string,
+    city: string,
+    state: string,
+    zip_code: string,
+    street_address2?: string
+  }
+}) {
   const lastResult = useActionData();
 
   const defaultAddress = {
-    street: "",
-    city: "",
-    state: "NC",
-    zip: ""
+    street_address: address?.street_address || "",
+    street_address2: address?.street_address2 || "",
+    city: address?.city || "",
+    state: address?.state || "",
+    zip_code: address?.zip_code || "",
   }
 
   const [form, fields] = useForm({
@@ -127,10 +138,11 @@ export function AddressFormSection() {
     defaultValue: defaultAddress,
   })
 
-  const streetError = fields.street.errors?.[0];
+  const streetError = fields.street_address.errors?.[0];
+  const street2Error = fields.street_address2?.errors?.[0];
   const cityError = fields.city.errors?.[0];
   const stateError = fields.state.errors?.[0];
-  const zipError = fields.zip.errors?.[0];
+  const zipError = fields.zip_code.errors?.[0];
 
   const errorData = lastResult?.error;
 
@@ -170,10 +182,10 @@ export function AddressFormSection() {
             </label>
             <div className="mt-2">
               <input
-                id={fields.street.id}
-                key={fields.street.key}
-                name={fields.street.name}
-                defaultValue={fields.street.initialValue}
+                id={fields.street_address.id}
+                key={fields.street_address.key}
+                name={fields.street_address.name}
+                defaultValue={fields.street_address.initialValue}
                 type="text"
                 autoComplete="street-address"
                 className={cn(
@@ -185,6 +197,30 @@ export function AddressFormSection() {
               streetError &&
               <p className="mt-2 text-sm text-red-600">
                 {streetError}
+              </p>
+            }
+          </div>
+          <div className="col-span-full">
+            <label htmlFor="street-address2" className="block text-sm/6 font-medium text-gray-900">
+              Street address
+            </label>
+            <div className="mt-2">
+              <input
+                id={fields.street_address2.id}
+                key={fields.street_address2.key}
+                name={fields.street_address2.name}
+                defaultValue={fields.street_address2.initialValue}
+                type="text"
+                autoComplete="street-address"
+                className={cn(
+                  displayStyle(street2Error),
+                )}
+              />
+            </div>
+            {
+              street2Error &&
+              <p className="mt-2 text-sm text-red-600">
+                {street2Error}
               </p>
             }
           </div>
@@ -248,10 +284,10 @@ export function AddressFormSection() {
             </label>
             <div className="mt-2">
               <input
-                id={fields.zip.id}
-                name={fields.zip.name}
-                key={fields.zip.key}
-                defaultValue={fields.zip.initialValue}
+                id={fields.zip_code.id}
+                name={fields.zip_code.name}
+                key={fields.zip_code.key}
+                defaultValue={fields.zip_code.initialValue}
                 type="text"
                 className={cn(
                   displayStyle(zipError),

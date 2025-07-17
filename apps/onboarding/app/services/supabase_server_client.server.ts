@@ -4,6 +4,8 @@ import {
   serializeCookieHeader,
 } from "@supabase/ssr";
 import { initEnvVariables } from "~/env.server";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "./supabase_type";
 
 export function createSupaServerClient({ request }: { request: Request }) {
   const { SUPABASE_URL, SUPABASE_ANON_KEY } = initEnvVariables();
@@ -29,4 +31,9 @@ export function createSupaServerClient({ request }: { request: Request }) {
   });
 
   return { supabase, headers };
+}
+
+export function createSupabaseAdmin() {
+  const { SUPABASE_URL, SUPABASE_SERVICE_KEY } = initEnvVariables();
+  return createClient<Database>(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 }
