@@ -1,4 +1,11 @@
 import { Button } from "~/components/ui/button";
+import { requireAuth } from "~/services/clerk_auth.server";
+import type { Route } from "./+types/apply_welcome";
+
+export async function loader(args: Route.LoaderArgs) {
+  await requireAuth(args)
+  return null;
+}
 
 export default function ApplyWelcome() {
   return (
