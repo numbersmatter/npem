@@ -4,6 +4,7 @@ import {
   timestamp,
   boolean,
   integer,
+  uuid,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
@@ -67,7 +68,7 @@ export const verification = pgTable("verification", {
 });
 
 export const addresses = pgTable("addresses", {
-  id: text("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   streetAddress: text("street_address").notNull(),
   secondaryAddress: text("secondary_address"),
   city: text("city").notNull(),
@@ -79,7 +80,7 @@ export const profiles = pgTable("profiles", {
   id: text("id").primaryKey(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
-  defaultAddress: text("default_address").references(() => addresses.id, {
+  defaultAddress: uuid("default_address").references(() => addresses.id, {
     onDelete: "cascade",
   }),
   createdAt: timestamp("created_at").$defaultFn(

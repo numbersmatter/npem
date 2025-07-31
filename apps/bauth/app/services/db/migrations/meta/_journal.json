@@ -15,6 +15,13 @@
       "when": 1753995095784,
       "tag": "0001_jazzy_madelyne_pryor",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753998961338,
+      "tag": "0002_early_titania",
+      "breakpoints": true
     }
   ]
 }
