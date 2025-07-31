@@ -65,3 +65,27 @@ export const verification = pgTable("verification", {
     () => /* @__PURE__ */ new Date()
   ),
 });
+
+export const addresses = pgTable("addresses", {
+  id: text("id").primaryKey(),
+  streetAddress: text("street_address").notNull(),
+  secondaryAddress: text("secondary_address"),
+  city: text("city").notNull(),
+  state: text("state").notNull(),
+  zipCode: text("zip_code").notNull(),
+});
+
+export const profiles = pgTable("profiles", {
+  id: text("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  defaultAddress: text("default_address").references(() => addresses.id, {
+    onDelete: "cascade",
+  }),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  updatedAt: timestamp("updated_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+});
