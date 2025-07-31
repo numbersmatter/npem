@@ -1,15 +1,23 @@
 import { db } from "~/services/db/db.server";
 import type { Route } from "./+types/address";
 import { addresses } from "~/services/db/schema";
+import { requireAuth } from "~/services/auth/auth_utils.server";
+
+
+export async function loader({ request }: Route.LoaderArgs) {
+  await requireAuth({ request });
+
+  return {};
+};
+
 
 
 export async function action({ request }: Route.ActionArgs) {
   // Handle the form submission for address
   const formData = await request.formData();
-  const address = formData.get("address") as string;
+
   // Process the address data as needed
   await db.insert(addresses).values({
-    id: "123445",
     // firstName: formData.get("first-name") as string,
     // lastName: formData.get("last-name") as string,
     streetAddress: formData.get("street-address") as string,

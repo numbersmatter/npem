@@ -1,13 +1,15 @@
 import { auth } from "~/services/auth/auth.server";
 import type { Route } from "./+types/login";
-import { Form, redirect, useFetcher } from "react-router";
-import { authClient } from "~/services/auth/auth_client";
+import { Form, redirect, useFetcher, useSearchParams } from "react-router";
+import { authClient, signIn } from "~/services/auth/auth_client";
 import clsx from "clsx";
 
-export async function loader({ request }: Route.LoaderArgs) {
+export async function loader({ request, }: Route.LoaderArgs) {
   const session = await auth.api.getSession(request);
   console.log("Login Route Loader - Session:", session);
   // You can handle session checks here if needed   
+
+
 
   return {};
 };
@@ -119,6 +121,15 @@ export default function LoginPage({ }: Route.ComponentProps) {
 
 
 function LoginCard() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectUrl") || "/protected";
+
+
+
+  const googleRegister = () => signIn.social({
+    provider: "google",
+    callbackURL: redirectTo,
+  });
 
   return (
     <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
@@ -221,6 +232,8 @@ function LoginCard() {
 
         <div className="mt-6 grid grid-cols-2 gap-4">
           <button
+            type="button"
+            onClick={() => googleRegister()}
             className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:ring-transparent"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
