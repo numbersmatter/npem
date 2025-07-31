@@ -12,10 +12,12 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@neondatabase/serverless": "^1.0.1",
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
     "better-auth": "^1.2.12",
+    "clsx": "^2.1.1",
     "dotenv": "^17.2.0",
     "drizzle-orm": "^0.44.3",
     "isbot": "^5.1.27",
