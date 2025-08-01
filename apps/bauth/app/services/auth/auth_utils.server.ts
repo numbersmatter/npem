@@ -1,5 +1,8 @@
 import { redirect } from "react-router";
 import { auth } from "~/services/auth/auth.server";
+import { db } from "~/services/db/db.server";
+import { profiles } from "../db/schema";
+import { eq } from "drizzle-orm";
 
 const requireAuth = async ({ request }: { request: Request }) => {
   const session = await auth.api.getSession(request);
@@ -19,4 +22,20 @@ const requireAuth = async ({ request }: { request: Request }) => {
   };
 };
 
-export { requireAuth };
+const requireProfile = async ({ request }: { request: Request }) => {
+  const { user } = await requireAuth({ request });
+
+  // const result = await db.select()
+  // .from(profiles)
+  // .where(eq(profiles.id, user.id));
+
+  const profile = await db.query.profiles.findFirst({
+    where: eq(profiles.id, user.id),
+  });
+
+  if (!profile) {
+    throw redirect("/profile");
+  }
+};
+
+export { requireAuth, requireProfile };
