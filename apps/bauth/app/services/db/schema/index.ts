@@ -75,19 +75,37 @@ export const addresses = pgTable("addresses", {
   city: text("city").notNull(),
   state: text("state").notNull(),
   zipCode: text("zip_code").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  updatedAt: timestamp("updated_at")
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ new Date()),
+});
+
+export const defaultAddress = pgTable("default_address", {
+  id: text("id").primaryKey(),
+  streetAddress: text("street_address").notNull(),
+  secondaryAddress: text("secondary_address"),
+  city: text("city").notNull(),
+  state: text("state").notNull(),
+  zipCode: text("zip_code").notNull(),
+  createdAt: timestamp("created_at").$defaultFn(
+    () => /* @__PURE__ */ new Date()
+  ),
+  updatedAt: timestamp("updated_at")
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ new Date()),
 });
 
 export const profiles = pgTable("profiles", {
   id: text("id").primaryKey(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
-  defaultAddress: uuid("default_address").references(() => addresses.id, {
-    onDelete: "cascade",
-  }),
   createdAt: timestamp("created_at").$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),
   updatedAt: timestamp("updated_at")
-    .$onUpdate(() => sql`now()`)
-    .defaultNow(),
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .$defaultFn(() => /* @__PURE__ */ new Date()),
 });

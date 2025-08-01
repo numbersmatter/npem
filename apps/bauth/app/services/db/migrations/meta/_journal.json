@@ -29,6 +29,27 @@
       "when": 1753999311092,
       "tag": "0003_sharp_screwball",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1754079741526,
+      "tag": "0004_pale_sauron",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1754081405676,
+      "tag": "0005_secret_zaladane",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1754085251310,
+      "tag": "0006_bright_hedge_knight",
+      "breakpoints": true
     }
   ]
 }
