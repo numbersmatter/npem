@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -86,7 +87,7 @@ export const profiles = pgTable("profiles", {
   createdAt: timestamp("created_at").$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),
-  updatedAt: timestamp("updated_at").$defaultFn(
-    () => /* @__PURE__ */ new Date()
-  ),
+  updatedAt: timestamp("updated_at")
+    .$onUpdate(() => sql`now()`)
+    .defaultNow(),
 });

@@ -10,7 +10,9 @@ export default [
   route("api/auth/*", "routes/auth_api.tsx"),
   route("protected", "routes/protected.tsx"),
   route("login", "routes/login.tsx"),
-  layout("./routes/layout.tsx", [route("profile", "routes/profile.tsx")]),
+  layout("./routes/layout.tsx", [
+    route("profile", "routes/profile/profile.tsx"),
+  ]),
   route("register", "routes/register.tsx"),
   route("address", "routes/address.tsx"),
 ] satisfies RouteConfig;
