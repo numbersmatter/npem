@@ -7,7 +7,6 @@ import { getUserProfileData, saveAddress, saveBasicProfile } from './data.server
 import { useForm } from "@conform-to/react";
 import { AddressSchema, BasicProfileSchema, type AddressType, type BasicProfile } from "./schemas";
 import { Form } from 'react-router';
-import { parse } from 'path';
 import { parseWithZod } from '@conform-to/zod/v4';
 
 
@@ -65,6 +64,7 @@ export default function ProfilePage({
   actionData, loaderData
 }: Route.ComponentProps
 ) {
+  console.log("ProfilePage loaderData", loaderData);
   return (
     <div className="divide-y divide-gray-900/10">
       <div className="grid grid-cols-1 gap-x-8 gap-y-8 py-10 md:grid-cols-3">

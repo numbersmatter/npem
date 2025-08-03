@@ -6,13 +6,27 @@ import type { User } from "better-auth";
 import { eq } from "drizzle-orm";
 
 export const getUserProfileData = async ({ user }: { user: User }) => {
-  const profile = await db.query.profiles.findFirst({
-    where: eq(profiles.id, user.id),
-  });
+  // const profile = await db.query.profiles.findFirst({
+  //   where: eq(profiles.id, user.id),
+  // });
 
-  const address = await db.query.defaultAddress.findFirst({
-    where: eq(defaultAddress.id, user.id),
-  });
+  // const address = await db.query.defaultAddress.findFirst({
+  //   where: eq(defaultAddress.id, user.id),
+  // });
+
+  const fullProfileQuery = await db
+    .select()
+    .from(profiles)
+    .where(eq(profiles.id, user.id))
+    .leftJoin(defaultAddress, eq(defaultAddress.id, user.id));
+
+  // const fullProfile = fullProfileQuery[0]
+
+  const profile = fullProfileQuery.length ? fullProfileQuery[0].profiles : null;
+
+  const address = fullProfileQuery.length
+    ? fullProfileQuery[0].default_address
+    : null;
 
   const defaultProfileData = {
     firstName: profile?.firstName ?? "",
