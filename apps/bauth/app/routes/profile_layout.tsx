@@ -1,18 +1,5 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems
-} from '@headlessui/react'
-import {
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  UserIcon
-} from '@heroicons/react/24/outline'
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Bars3Icon, BellIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Outlet, useNavigate } from 'react-router'
 import type { Route } from './+types/layout'
@@ -20,42 +7,34 @@ import { requireAuth } from '~/services/auth/auth_utils.server'
 import { getUserProfileData } from './dashboard/data.server'
 import { signOut } from '~/services/auth/auth_client'
 
-// const user = {
-//   name: 'Tom Cook',
-//   email: 'tom@example.com',
-//   imageUrl:
-//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-// }
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', current: true },
-  { name: 'Projects', href: '/projects', current: false },
-  { name: 'Calendar', href: '/calendar', current: false },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '/profile' },
-
-]
-
 type SiteProfile = {
   firstName: string;
   lastName: string;
   email: string;
 }
 
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', current: true },
+  { name: 'Projects', href: '/projects', current: false },
+  { name: 'Calendar', href: '/calendar', current: false },
+]
+
+
+
 export async function loader({ request }: Route.LoaderArgs) {
   const { user } = await requireAuth({ request })
-  const { siteProfile } = await getUserProfileData({ user });
+  // const { siteProfile } = await getUserProfileData({ user });
 
   // This is a placeholder for any data fetching logic you might need
   // For example, fetching user data or settings
-  return { siteProfile };
+  return {};
 }
 
 
 
 export default function MainLayout({ loaderData }: Route.ComponentProps) {
 
-  const { siteProfile } = loaderData;
+  // const { siteProfile } = loaderData;
   const navigate = useNavigate();
   const signOutSite = async () => {
     // Logic to sign out the user
@@ -73,8 +52,8 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
     <>
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-white shadow-xs">
-          <DesktopNavBar siteProfile={siteProfile} signOutSite={signOutSite} />
-          <MobileMenu siteProfile={siteProfile} signOutSite={signOutSite} />
+          <DesktopNavBar signOutSite={signOutSite} />
+          <MobileMenu signOutSite={signOutSite} />
         </Disclosure>
 
         <div className="py-10">
@@ -89,9 +68,7 @@ export default function MainLayout({ loaderData }: Route.ComponentProps) {
   )
 }
 
-function DesktopNavBar({
-  siteProfile, signOutSite
-}: { siteProfile: SiteProfile; signOutSite: () => Promise<void> }) {
+function DesktopNavBar({ signOutSite }: { signOutSite: () => Promise<void> }) {
   return <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="flex h-16 justify-between">
       <div className="flex">
@@ -106,7 +83,7 @@ function DesktopNavBar({
             className="hidden h-8 w-auto lg:block" />
         </div>
         <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-          {navigation.map((item) => (
+          {/* {navigation.map((item) => (
             <a
               key={item.name}
               href={item.href}
@@ -120,7 +97,7 @@ function DesktopNavBar({
             >
               {item.name}
             </a>
-          ))}
+          ))} */}
         </div>
       </div>
       <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -143,28 +120,12 @@ function DesktopNavBar({
 
           <MenuItems
             transition
-            className="absolute right-0 z-10 mt-2 w-72 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+            className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
           >
-            <div className="px-4 py-3">
-              <p className="text-sm">Signed in as</p>
-              <p className="truncate text-sm font-medium text-gray-900">
-                {siteProfile.email}
-              </p>
-            </div>
-            {userNavigation.map((item) => (
-              <MenuItem key={item.name}>
-                <a
-                  href={item.href}
-                  className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                >
-                  {item.name}
-                </a>
-              </MenuItem>
-            ))}
             <MenuItem key="sign-out">
               <button
                 onClick={signOutSite}
-                className="block px-4 min-w-full text-left py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
               >
                 Sign Out
               </button>
@@ -186,9 +147,9 @@ function DesktopNavBar({
 }
 
 function MobileMenu({
-  siteProfile, signOutSite
+  signOutSite
 }: {
-  siteProfile: SiteProfile, signOutSite: () => Promise<void>
+  signOutSite: () => Promise<void>
 }) {
   return <DisclosurePanel className="sm:hidden">
     <div className="space-y-1 pt-2 pb-3">
@@ -214,14 +175,7 @@ function MobileMenu({
         <div className="shrink-0">
           <div className="size-10 rounded-full bg-amber-200" />
         </div>
-        <div className="ml-3">
-          <div className="text-base font-medium text-gray-800">
-            {siteProfile.firstName} {siteProfile.lastName}
-          </div>
-          <div className="text-sm font-medium text-gray-500">{siteProfile.email}
 
-          </div>
-        </div>
         <button
           type="button"
           className="relative ml-auto shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
@@ -232,16 +186,7 @@ function MobileMenu({
         </button>
       </div>
       <div className="mt-3 space-y-1">
-        {userNavigation.map((item) => (
-          <DisclosureButton
-            key={item.name}
-            as="a"
-            href={item.href}
-            className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-          >
-            {item.name}
-          </DisclosureButton>
-        ))}
+
         <DisclosureButton
           as="button"
           onClick={signOutSite}
@@ -253,4 +198,5 @@ function MobileMenu({
     </div>
   </DisclosurePanel>
 }
+
 

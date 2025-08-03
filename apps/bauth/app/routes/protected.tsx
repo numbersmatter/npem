@@ -2,14 +2,11 @@ import { router } from "better-auth/api";
 import { redirect, useNavigate, type LoaderFunctionArgs } from "react-router";
 import { auth } from "~/services/auth/auth.server";
 import { authClient } from "~/services/auth/auth_client";
+import { requireAuth } from "~/services/auth/auth_utils.server";
 
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await auth.api.getSession(request);
-  console.log("Protected Route Loader - Session:", session);
-  if (!session || !session.user) {
-    throw redirect("/");
-  }
+  const { user } = await requireAuth({ request })
 
   // throw redirect("/");
   return {}

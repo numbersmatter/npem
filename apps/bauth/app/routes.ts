@@ -10,8 +10,10 @@ export default [
   route("api/auth/*", "routes/auth_api.tsx"),
   route("protected", "routes/protected.tsx"),
   route("login", "routes/login.tsx"),
-  layout("./routes/layout.tsx", [
+  layout("./routes/profile_layout.tsx", [
     route("profile", "routes/profile/profile.tsx"),
+  ]),
+  layout("./routes/layout.tsx", [
     route("dashboard", "routes/dashboard/dashpage.tsx"),
   ]),
   route("register", "routes/register.tsx"),

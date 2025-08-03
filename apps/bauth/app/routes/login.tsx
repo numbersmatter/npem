@@ -122,7 +122,7 @@ export default function LoginPage({ }: Route.ComponentProps) {
 
 function LoginCard() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectUrl") || "/protected";
+  const redirectTo = searchParams.get("redirectUrl") || "/dashboard";
 
 
 
