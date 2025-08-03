@@ -2,6 +2,8 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Outlet } from 'react-router'
+import type { Route } from './+types/layout'
+import { requireAuth } from '~/services/auth/auth_utils.server'
 
 const user = {
   name: 'Tom Cook',
@@ -20,6 +22,15 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
+
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const { user } = await requireAuth({ request })
+
+  // This is a placeholder for any data fetching logic you might need
+  // For example, fetching user data or settings
+  return { user };
+}
 
 
 

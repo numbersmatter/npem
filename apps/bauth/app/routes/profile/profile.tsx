@@ -75,11 +75,6 @@ export default function ProfilePage({
           </p>
         </div>
         <BasicProfile defaultValue={loaderData.defaultProfileData} />
-        {
-          actionData && <pre className="text-red-500">
-            {JSON.stringify(actionData, null, 2)}
-          </pre>
-        }
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-8 py-10 md:grid-cols-3">
@@ -96,8 +91,6 @@ export default function ProfilePage({
           </pre>
         }
       </div>
-
-
     </div>
   )
 }

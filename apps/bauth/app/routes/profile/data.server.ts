@@ -4,6 +4,7 @@ import { db } from "~/services/db/db.server";
 import { addresses, defaultAddress, profiles } from "~/services/db/schema";
 import type { User } from "better-auth";
 import { eq } from "drizzle-orm";
+import { dataWithSuccess } from "remix-toast";
 
 export const getUserProfileData = async ({ user }: { user: User }) => {
   // const profile = await db.query.profiles.findFirst({
@@ -31,7 +32,7 @@ export const getUserProfileData = async ({ user }: { user: User }) => {
   const defaultProfileData = {
     firstName: profile?.firstName ?? "",
     lastName: profile?.lastName ?? "",
-    cellPhone: "(123) 456-7890",
+    cellPhone: profile?.cellPhone ?? "",
   };
 
   const defaultAddressData: AddressType = {
@@ -79,7 +80,10 @@ export const saveBasicProfile = async ({
       },
     });
 
-  return submission.reply();
+  return dataWithSuccess(
+    { result: "Profile saved successfully" },
+    { message: "Profile updated 🎉", description: "description of toast" }
+  );
 };
 
 export const saveAddress = async ({
@@ -119,4 +123,9 @@ export const saveAddress = async ({
         zipCode: a.zipCode,
       },
     });
+
+  return dataWithSuccess(
+    { result: "Address saved successfully" },
+    { message: "Address saved! 🎉", description: "description of toast" }
+  );
 };
