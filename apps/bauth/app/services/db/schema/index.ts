@@ -102,6 +102,7 @@ export const profiles = pgTable("profiles", {
   id: text("id").primaryKey(),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
+  cellPhone: text("cell_phone"),
   createdAt: timestamp("created_at").$defaultFn(
     () => /* @__PURE__ */ new Date()
   ),

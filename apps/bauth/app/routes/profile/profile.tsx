@@ -108,7 +108,7 @@ function BasicProfile({ defaultValue }: { defaultValue: BasicProfile }) {
     defaultValue,
   })
 
-  const [cellPhone, setCellPhone] = useState("");
+  const [cellPhone, setCellPhone] = useState(fields.cellPhone.defaultValue || "");
 
   // Format input as (555) 555-5555
   const formatPhone = (value: string) => {
@@ -178,7 +178,6 @@ function BasicProfile({ defaultValue }: { defaultValue: BasicProfile }) {
                 id={fields.cellPhone.id}
                 name={fields.cellPhone.name}
                 key={fields.cellPhone.key}
-                defaultValue={fields.cellPhone.defaultValue}
                 type="text"
                 value={cellPhone}
                 onChange={(e) => setCellPhone(formatPhone(e.target.value))}

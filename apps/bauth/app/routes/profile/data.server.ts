@@ -60,7 +60,7 @@ export const saveBasicProfile = async ({
     return submission.reply();
   }
 
-  const { firstName, lastName } = submission.value;
+  const { firstName, lastName, cellPhone } = submission.value;
 
   await db
     .insert(profiles)
@@ -68,12 +68,14 @@ export const saveBasicProfile = async ({
       id: user.id,
       firstName,
       lastName,
+      cellPhone,
     })
     .onConflictDoUpdate({
       target: profiles.id,
       set: {
         firstName,
         lastName,
+        cellPhone,
       },
     });
 
